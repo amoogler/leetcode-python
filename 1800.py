@@ -5,9 +5,6 @@ class Solution:
         slow = 0
         subarray_sum = nums[slow]
         max_sum = subarray_sum
-        
-        if len(nums) == 0:
-            return max_sum
 
         for fast in range(1, len(nums)):
             if nums[fast] > nums[fast - 1]:
