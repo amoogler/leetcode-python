@@ -5,8 +5,8 @@ class Solution:
         pre_sum = 0
         res = []
         
-        for i in range(len(nums)):
-            pre_sum += nums[i]
+        for num in nums:
+            pre_sum += num
             res.append(pre_sum)
         
         return res

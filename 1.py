@@ -5,10 +5,11 @@ class Solution:
         ans = []
         dictionary = dict()
         
-        for i in range(len(nums)):
-            if target - nums[i] in dictionary.keys():
-                ans = [dictionary[target - nums[i]], i]
+        for idx, num in enumerate(nums):
+            if target - num in dictionary.keys():
+                ans = [dictionary[target - num], idx]
             else:
-                dictionary[nums[i]] = i
+                dictionary[num] = idx
         
         return ans
+ 

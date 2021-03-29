@@ -6,14 +6,7 @@ class Solution:
         allowed = set(allowed)
         
         for word in words:
-            consistent = True
-            for char in word:
-                if char not in allowed:
-                    consistent = False
-                    break
-                    
-            if consistent:
+            if all(char in allowed for char in word):
                 count += 1
                 
         return count
- 

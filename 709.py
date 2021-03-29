@@ -3,10 +3,9 @@ class Solution:
         lower_letters = []
         
         for char in str:
-            if ord(char) <= ord('Z') and ord(char) >= ord('A'):
+            if ord('A') <= ord(char) <= ord('Z'):
                 lower_letters.append(chr(ord(char) - ord('A') + ord('a')))
             else:
                 lower_letters.append(char)
         
         return ''.join(lower_letters)
- 

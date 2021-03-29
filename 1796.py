@@ -1,5 +1,3 @@
-import heapq as hq
-
 class Solution:
     def secondHighest(self, s: str) -> int:
         digits_set = set()
@@ -12,12 +10,6 @@ class Solution:
             return -1
                 
         digits = list(digits_set)
-        hq.heapify(digits)
+        digits.sort()
         
-        for i in range(len(digits) - 2):
-            hq.heappop(digits)
-
-        second = hq.heappop(digits)
-        first = hq.heappop(digits)
-        
-        return second if second != first else -1
+        return digits[len(digits) - 2]
