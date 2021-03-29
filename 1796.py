@@ -12,4 +12,4 @@ class Solution:
         digits = list(digits_set)
         digits.sort()
         
-        return digits[len(digits) - 2]
+        return digits[-2]

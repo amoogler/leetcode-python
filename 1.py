@@ -8,6 +8,7 @@ class Solution:
         for idx, num in enumerate(nums):
             if target - num in dictionary.keys():
                 ans = [dictionary[target - num], idx]
+                break
             else:
                 dictionary[num] = idx
         
