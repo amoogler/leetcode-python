@@ -2,9 +2,9 @@ class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
         pairs = []
         
-        for i in range(len(s1)):
-            if s1[i] != s2[i]:
-                pairs.append([s1[i], s2[i]])
+        for idx, (e1, e2) in enumerate(zip(s1, s2)):
+            if e1 != e2:
+                pairs.append([e1, e2])
                 
                 if len(pairs) > 2:
                     return False
