@@ -2,7 +2,7 @@ class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
         pairs = []
         
-        for idx, (e1, e2) in enumerate(zip(s1, s2)):
+        for e1, e2 in zip(s1, s2):
             if e1 != e2:
                 pairs.append([e1, e2])
                 
