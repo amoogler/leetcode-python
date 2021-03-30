@@ -5,12 +5,12 @@ class Solution:
         highest = 0
         pre_sum = 0
         sum_list = []
+        sum_list.append(highest)
         
         for num in gain:
             pre_sum += num
             sum_list.append(pre_sum)
-        
-        for s in sum_list:
-            highest = max(highest, s)
+
+        highest = max(sum_list)
         
         return highest

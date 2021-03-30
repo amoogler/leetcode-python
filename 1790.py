@@ -15,4 +15,4 @@ class Solution:
         if len(pairs) == 1:
             return False
                 
-        return True if pairs[0][0] == pairs[1][1] and pairs[0][1] == pairs[1][0] else False   
+        return pairs[0][0] == pairs[1][1] and pairs[0][1] == pairs[1][0]

@@ -1,3 +1,6 @@
+from collections import defaultdict
+from typing import List
+
 class Solution:
     def commonChars(self, A: List[str]) -> List[str]:
         tables = []
@@ -6,19 +9,16 @@ class Solution:
         if len(A) == 1:
             return list(A[0])
 
-        for idx, word in enumerate(A, start=1):
-            table = dict()
+        for word in A[1:]:
+            table = defaultdict(lambda: 0)
             
             for char in word:
-                if char in table.keys():
-                    table[char] += 1
-                else:
-                    table[char] = 1
+                table[char] += 1
             
             tables.append(table)
 
         for letter in A[0]:
-            if all(letter in table.keys() and table[letter] > 0 for table in tables):
+            if all(letter in table and table[letter] > 0 for table in tables):
                 res.append(letter)
                 
                 for table in tables:

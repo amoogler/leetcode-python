@@ -3,9 +3,9 @@ class Solution:
         count = 0
         
         while n > 0:
-            num = n & 1
+            lsb = n & 1
             
-            if num == 1:
+            if lsb == 1:
                 count += 1
                 
             n >>= 1
