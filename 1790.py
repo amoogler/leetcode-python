@@ -1,18 +1,8 @@
 class Solution:
     def areAlmostEqual(self, s1: str, s2: str) -> bool:
-        pairs = []
-        
-        for e1, e2 in zip(s1, s2):
-            if e1 != e2:
-                pairs.append([e1, e2])
-                
-                if len(pairs) > 2:
-                    return False
-                
-        if not pairs:
+        if s1 == s2:
             return True
-        
-        if len(pairs) == 1:
-            return False
+
+        diff = [(e1, e2) for e1, e2 in zip(s1, s2) if e1 != e2]
                 
-        return pairs[0][0] == pairs[1][1] and pairs[0][1] == pairs[1][0]
+        return diff[0] == diff[1][::-1] if len(diff) == 2 else False
