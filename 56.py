@@ -2,21 +2,20 @@ from typing import List
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=self.compare)        
+        sorted_intervals = sorted(intervals, key=lambda x : x[0])       
         merged = []
-        current = intervals[0]
+        current = sorted_intervals[0]
         
-        for incoming in intervals[1:]:
-            if incoming[0] > current[1]:
+        for incoming_start, incoming_end in sorted_intervals[1:]:
+            current_start = current[0]
+            current_end = current[1]
+
+            if incoming_start > current_end:
                 merged.append(current)
-                current = incoming
+                current = [incoming_start, incoming_end]
             else:
-                current = [current[0], max(current[1], incoming[1])]
+                current = [current_start, max(current_end, incoming_end)]
         
         merged.append(current)
         
-        return merged               
-    
-    def compare(self, interval: List[int]) -> int:
-        return interval[0]
- 
+        return merged
