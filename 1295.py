@@ -5,12 +5,12 @@ class Solution:
         count = 0
         
         for num in nums:
-            if self.computeDigitNumer(num) % 2 == 0:
+            if self.countDigits(num) % 2 == 0:
                 count += 1
         
         return count
 
-    def computeDigitNumer(self, num: int) -> int:
+    def countDigits(self, num: int) -> int:
         count = 0
         
         while num > 0:
