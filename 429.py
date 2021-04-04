@@ -1,5 +1,4 @@
 from typing import List
-from collections import deque
 
 """
 # Definition for a Node.
@@ -16,23 +15,20 @@ class Solution:
         if not root:
             return levels
         
-        queue = deque([root])
-        prev, curr, level = 1, 0, []
+        queue = collections.deque([root])
         
         while queue:
-            node = queue.popleft()
-            prev -= 1
-            level.append(node.val)
+            level = []
+            level_length = len(queue)
             
-            for child in node.children:
-                if child:
-                    queue.append(child)
-                    curr += 1
+            for _ in range(level_length):
+                node = queue.popleft()
+                level.append(node.val)
             
-            if prev == 0:
-                levels.append(level)
-                level = []
-                prev = curr
-                curr = 0
+                for child in node.children:
+                    if child:
+                        queue.append(child)
+
+            levels.append(level)
         
         return levels
