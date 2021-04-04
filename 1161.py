@@ -1,5 +1,3 @@
-from collections import deque
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -8,14 +6,14 @@ from collections import deque
 #         self.right = right
 class Solution:
     def maxLevelSum(self, root: TreeNode) -> int:
-        level_sums = []
-        queue = deque([root])
-        
+        queue = collections.deque([root])
+        max_sum, result_level, level = root.val, 1, 1
+     
         while queue:
             level_sum = 0
             level_length = len(queue)
             
-            while level_length > 0:
+            for _ in range(level_length):
                 node = queue.popleft()
                 level_sum += node.val
                 
@@ -24,18 +22,11 @@ class Solution:
                 
                 if node.right:
                     queue.append(node.right)
-                
-                level_length -= 1
 
-            level_sums.append(level_sum)
-            level_sum = 0
+            if level_sum > max_sum:
+                max_sum = level_sum
+                result_level = level
 
-        min_level = 0
-        max_sum = max(level_sums)
-
-        for idx, level_sum in enumerate(level_sums):
-            if level_sum == max_sum:
-                min_level = idx + 1
-                break
+            level += 1
         
-        return min_level
+        return result_level
