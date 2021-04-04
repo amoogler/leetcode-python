@@ -21,7 +21,7 @@ class Solution:
             level = []
             level_length = len(queue)
             
-            while level_length > 0:
+            for _ in range(level_length):
                 node = queue.popleft()
                 level.append(node.val)
                 
@@ -30,10 +30,7 @@ class Solution:
                 
                 if node.right:
                     queue.append(node.right)
-                    
-                level_length -= 1
             
             levels.append(level)
-            level = []
         
         return reversed(levels)
