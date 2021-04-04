@@ -9,24 +9,22 @@ class Solution:
         queue = collections.deque([root])
         
         while queue:
-            level = []
+            level = set()
             level_length = len(queue)
             
-            while level_length > 0:
+            for _ in range(level_length):
                 node = queue.popleft()
-                level.append(node.val)
+                level.add(node.val)
                 
                 if node.left:
                     queue.append(node.left)
                 
                 if node.right:
                     queue.append(node.right)
-                    
-                level_length -= 1
                 
                 if not node.left or not node.right:
                     continue
-                
+
                 # Siblings
                 if (x == node.left.val and y == node.right.val) or \
                    (x == node.right.val and y == node.left.val):
