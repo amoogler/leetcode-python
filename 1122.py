@@ -3,8 +3,10 @@ from typing import List
 
 class Solution:
     def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
-        only_arr1 = sorted([e for e in arr1 if e not in arr2])
-        num_pos = defaultdict(lambda: 0)
+        arr1_set = set(arr1)
+        arr2_set = set(arr2)
+        only_arr1 = sorted([e for e in arr1_set if e not in arr2_set])
+        num_pos = defaultdict(int)
         
         for idx, element in enumerate(arr2):
             num_pos[element] = idx
