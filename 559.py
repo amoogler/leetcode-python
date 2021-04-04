@@ -20,14 +20,12 @@ class Solution:
         while queue:
             queue_length = len(queue)
             
-            while queue_length > 0:
+            for _ in range(queue_length):
                 node = queue.popleft()
                 
                 for child in node.children:
                     if child:
                         queue.append(child)
-                        
-                queue_length -= 1
                   
             max_depth += 1
         
