@@ -6,9 +6,6 @@ class Solution:
         
         for count in Counter(nums).values():
             if count > 1:
-                total_pairs += self.countPair(count)
+                total_pairs += math.comb(count, 2)
         
         return total_pairs
-    
-    def countPair(self, count: int) -> int:
-        return count * (count - 1) // 2
