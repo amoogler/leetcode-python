@@ -5,9 +5,9 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        start = 0
+        current = 0
         
         for idx, num in enumerate(nums):
             if num != 0:
-                nums[idx], nums[start] = nums[start], nums[idx]
-                start += 1
+                nums[idx], nums[current] = nums[current], nums[idx]
+                current += 1
