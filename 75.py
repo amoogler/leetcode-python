@@ -5,15 +5,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        start, mid, end = 0, 0, len(nums) - 1
+        start, current, end = 0, 0, len(nums) - 1
         
-        while mid <= end:
-            if nums[mid] == 0:
-                nums[start], nums[mid] = nums[mid], nums[start]
+        while current <= end:
+            if nums[current] == 0:
+                nums[start], nums[current] = nums[current], nums[start]
                 start += 1
-                mid += 1
-            elif nums[mid] == 2:
-                nums[end], nums[mid] = nums[mid], nums[end]
+                current += 1
+            elif nums[current] == 2:
+                nums[end], nums[current] = nums[current], nums[end]
                 end -= 1
             else:
-                mid += 1
+                current += 1
