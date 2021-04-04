@@ -1,5 +1,4 @@
 from typing import List
-from collections import deque
 
 # Definition for a binary tree node.
 # class TreeNode:
@@ -14,14 +13,14 @@ class Solution:
         if not root:
             return levels
         
-        queue = deque([root])
+        queue = collections.deque([root])
         toggle = False
         
         while queue:
             level = []
             level_length = len(queue)
             
-            while level_length > 0:
+            for _ in range(level_length):
                 node = queue.popleft()
                 level.append(node.val)
                 
@@ -30,15 +29,12 @@ class Solution:
                 
                 if node.right:
                     queue.append(node.right)
-                    
-                level_length -= 1
             
             if (toggle):
                 levels.append(reversed(level))
             else:
                 levels.append(level)
-        
-            level = []
+
             toggle = not toggle
 
         return levels               
