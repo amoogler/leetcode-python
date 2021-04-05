@@ -1,11 +1,9 @@
 class Solution:
     def shuffle(self, nums: List[int], n: int) -> List[int]:
         res = []
-        pointer = n
         
-        for num in nums[:n]:
-            res.append(num)
-            res.append(nums[pointer])
-            pointer += 1
+        for i in range(len(nums[:n])):
+            res.append(nums[i])
+            res.append(nums[i + n])
         
         return res
