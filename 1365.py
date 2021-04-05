@@ -4,13 +4,14 @@ class Solution:
         ans = []
         
         for num in nums:
-            count = 0
+            idx = sorted_nums.index(num)
             
-            for sorted_num in sorted_nums:
-                if num > sorted_num:
-                    count += 1
-            
-            ans.append(count)
-            count = 0
-        
+            while idx > 0:
+                if num > sorted_nums[idx - 1]:
+                    break
+                else:
+                    idx -= 1
+
+            ans.append(idx)
+
         return ans
