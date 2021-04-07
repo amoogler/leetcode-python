@@ -12,7 +12,10 @@ class Solution:
         return count
 
     def dfs(self, grid: List[List[str]], row: int, col: int) -> None:
-        if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]) or grid[row][col] != '1':
+        if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
+            return
+
+        if grid[row][col] != '1':
             return
 
         grid[row][col] = '0'
