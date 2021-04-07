@@ -17,7 +17,7 @@ class Solution:
 
         grid[row][col] = '0'
 
-        self.dfs(grid, row + 1, col)
-        self.dfs(grid, row - 1, col)
-        self.dfs(grid, row, col + 1)
-        self.dfs(grid, row, col - 1)
+        DIR = ((1, 0), (-1, 0), (0, 1), (0, -1))
+
+        for dr, dc in DIR:
+            self.dfs(grid, row + dr, col + dc)
