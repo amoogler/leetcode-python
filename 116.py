@@ -17,14 +17,15 @@ class Solution:
 
         while queue:
             level_length = len(queue)
+            prev = None
 
             for i in range(level_length):
                 node = queue.popleft()
 
-                if i == level_length - 1:
-                    node.next = None
-                else:
-                    node.next = queue[0]
+                if prev:
+                    prev.next = node
+
+                prev = node
 
                 if node.left:
                     queue.append(node.left)
