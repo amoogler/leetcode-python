@@ -10,15 +10,18 @@ class Solution:
         return max_size
 
     def computeIslandSize(self, grid: List[List[int]], row: int, col: int) -> int:
-        if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]) or grid[row][col] != 1:
+        if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
+            return 0
+
+        if grid[row][col] != 1:
             return 0
 
         grid[row][col] = 0
 
         island_size = 0
-        island_size += self.computeIslandSize(grid, row + 1, col)
-        island_size += self.computeIslandSize(grid, row - 1, col)
-        island_size += self.computeIslandSize(grid, row, col + 1)
-        island_size += self.computeIslandSize(grid, row, col - 1)
+        DIR = ((1, 0), (-1, 0), (0, 1), (0, -1))
+
+        for dr, dc in DIR:
+            island_size += self.computeIslandSize(grid, row + dr, col + dc)
 
         return 1 + island_size
