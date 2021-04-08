@@ -1,14 +1,10 @@
-import re
-
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        regex = re.compile('[^a-zA-Z0-9]')
-        letter_str = regex.sub('', s).lower()
-
-        start, end = 0, len(letter_str) - 1
+        letters = [char.lower() for char in s if char.isalnum()]
+        start, end = 0, len(letters) - 1
 
         while start < end:
-            if letter_str[start] != letter_str[end]:
+            if letters[start] != letters[end]:
                 return False
 
             start += 1
