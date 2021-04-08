@@ -9,13 +9,12 @@ class Solution:
         if not root:
             return True
 
-        checker = set([root.val])
         queue = collections.deque([root])
 
         while queue:
             node = queue.popleft()
 
-            if node.val not in checker:
+            if node.val != root.val:
                 return False
 
             if node.left:
