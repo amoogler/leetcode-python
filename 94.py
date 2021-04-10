@@ -26,7 +26,7 @@ class Solution:
         inorder_nodes, stack = [], []
         current = root
 
-        while len(stack) > 0 or current:
+        while stack or current:
             if current:
                 stack.append(current)
                 current = current.left
