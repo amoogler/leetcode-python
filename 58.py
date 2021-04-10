@@ -5,7 +5,6 @@ class Solution:
 
         for char in reversed(s):
             if not word_starts and char != ' ':
-                print(char)
                 word_starts = True
                 word_length += 1
             elif word_starts and char == ' ':
