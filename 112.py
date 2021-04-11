@@ -1,12 +1,16 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
-    def maxProfit(self, prices: List[int]) -> int:
-        min_value = prices[0]
-        max_profit = 0
+    def hasPathSum(self, root: TreeNode, targetSum: int) -> bool:
+        if not root:
+            return False
 
-        for i in range(1, len(prices)):
-            if prices[i - 1] < prices[i]:
-                max_profit = max(max_profit, prices[i] - min_value)
-            else:
-                min_value = min(min_value, prices[i])
+        if not root.left and not root.right:
+            return root.val == targetSum
 
-        return max_profit
+        return self.hasPathSum(root.left, targetSum - root.val) or \
+               self.hasPathSum(root.right, targetSum - root.val)
