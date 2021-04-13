@@ -3,10 +3,10 @@ class Solution:
         counter = collections.Counter(arr)
         unique = set()
 
-        for num in counter:
-            if counter[num] in unique:
+        for num, count in counter.items():
+            if count in unique:
                 return False
             else:
-                unique.add(counter[num])
+                unique.add(count)
 
         return True
