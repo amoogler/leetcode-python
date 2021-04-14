@@ -1,14 +1,14 @@
 class Solution:
     def balancedStringSplit(self, s: str) -> int:
-        count, stack = 0, []
+        res, count = 0, 0
 
         for char in s:
-            if stack and char != stack[-1]:
-                stack.pop()
-            else:
-                stack.append(char)
-
-            if not stack:
+            if char == 'L':
                 count += 1
+            elif char == 'R':
+                count -= 1
 
-        return count
+            if count == 0:
+                res += 1
+
+        return res
