@@ -3,8 +3,8 @@ class Solution:
         sorted_costs = sorted(costs)
         count = 0
 
-        for i, coin in enumerate(sorted_costs):
-            coins -= coin
+        for cost in sorted_costs:
+            coins -= cost
 
             if coins >= 0:
                 count += 1
