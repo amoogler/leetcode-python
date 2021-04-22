@@ -5,16 +5,18 @@ class Solution:
                 permutations.append(''.join(permutation))
                 return
 
-            permutation.append(S[depth])
+            ch = S[depth]
+
+            permutation.append(ch)
             backtrack(permutation, depth + 1)
             permutation.pop()
 
-            if S[depth].isalpha() and S[depth].isupper():
-                permutation.append(S[depth].lower())
-                backtrack(permutation, depth + 1)
-                permutation.pop()
-            elif S[depth].isalpha() and S[depth].islower():
-                permutation.append(S[depth].upper())
+            if ch.isalpha():
+                if ch.isupper():
+                    permutation.append(ch.lower())
+                else:
+                    permutation.append(ch.upper())
+
                 backtrack(permutation, depth + 1)
                 permutation.pop()
 
