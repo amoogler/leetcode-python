@@ -7,7 +7,8 @@ class Solution:
 
         for i in range(1, len(nums)):
             if nums[i] <= nums[i - 1]:
-                operations_num += (nums[i - 1] - nums[i] + 1)
-                nums[i] += (nums[i - 1] - nums[i] + 1)
+                diff = nums[i - 1] - nums[i] + 1
+                operations_num += diff
+                nums[i] += diff
 
         return operations_num
