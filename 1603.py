@@ -1,10 +1,7 @@
 class ParkingSystem:
 
     def __init__(self, big: int, medium: int, small: int):
-        self.lots = dict()
-        self.lots[1] = big
-        self.lots[2] = medium
-        self.lots[3] = small
+        self.lots = [0, big, medium, small]
 
     def addCar(self, carType: int) -> bool:
         if self.lots[carType] <= 0:
