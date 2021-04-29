@@ -3,12 +3,12 @@ class Solution:
         if not s:
             return t
 
-        curr = ord(s[0]) - ord('a')
+        curr = ord(s[0])
 
         for c in s[1:]:
-            curr ^= ord(c) - ord('a')
+            curr ^= ord(c)
 
         for c in t:
-            curr ^= ord(c) - ord('a')
+            curr ^= ord(c)
 
-        return chr(ord('a') + curr)
+        return chr(curr)
