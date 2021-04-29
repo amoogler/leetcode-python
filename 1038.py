@@ -9,7 +9,7 @@ class Solution:
         def pushleft(stack: List[TreeNode], node: TreeNode):
             while node:
                 stack.append(node)
-                node = node.left
+                node = node.right
 
         stack, nodes, total_sum = [], [], 0
         pushleft(stack, root)
@@ -17,12 +17,8 @@ class Solution:
         while stack:
             node = stack.pop()
             total_sum += node.val
-            nodes.append(node)
-            pushleft(stack, node.right)
-
-        for node in nodes:
-            temp = node.val
             node.val = total_sum
-            total_sum -= temp
+            nodes.append(node)
+            pushleft(stack, node.left)
 
         return root
