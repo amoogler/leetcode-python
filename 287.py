@@ -6,9 +6,9 @@ class Solution:
         while left < right:
             mid = left + (right - left) // 2
 
-            if mid + 1 > sorted_nums[mid]:
-                right = mid
-            else:
+            if sorted_nums[mid] > mid:
                 left = mid + 1
+            else:
+                right = mid
 
         return sorted_nums[left]
