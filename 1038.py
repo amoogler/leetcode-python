@@ -6,19 +6,19 @@
 #         self.right = right
 class Solution:
     def bstToGst(self, root: TreeNode) -> TreeNode:
-        def pushleft(stack: List[TreeNode], node: TreeNode):
+        def pushright(stack: List[TreeNode], node: TreeNode):
             while node:
                 stack.append(node)
                 node = node.right
 
         stack, nodes, total_sum = [], [], 0
-        pushleft(stack, root)
+        pushright(stack, root)
 
         while stack:
             node = stack.pop()
             total_sum += node.val
             node.val = total_sum
             nodes.append(node)
-            pushleft(stack, node.left)
+            pushright(stack, node.left)
 
         return root
