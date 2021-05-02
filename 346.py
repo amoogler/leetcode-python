@@ -7,14 +7,12 @@ class MovingAverage:
         self.size = size
         self.queue = collections.deque()
         self.num_sum = 0
-        self.num_count = 0
 
     def next(self, val: int) -> float:
         self.num_sum += val
-        self.num_count += 1
         self.queue.append(val)
 
-        if self.num_count > self.size:
+        if len(self.queue) > self.size:
             self.num_sum -= self.queue.popleft()
 
         return self.num_sum / len(self.queue)
