@@ -11,7 +11,7 @@ class Solution:
                 stack.append(node)
                 node = node.left
 
-        modes = []
+        modes, max_count = [], 0
         counter = collections.defaultdict(int)
         stack = []
         pushleft(stack, root)
@@ -19,12 +19,11 @@ class Solution:
         while stack:
             node = stack.pop()
             counter[node.val] += 1
+            max_count = max(max_count, counter[node.val])
             pushleft(stack, node.right)
 
-        mode_count = max(counter.values())
-
         for k, v in counter.items():
-            if v == mode_count:
+            if v == max_count:
                 modes.append(k)
 
         return modes
