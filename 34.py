@@ -1,5 +1,5 @@
 class Solution:
-    def findIndex(self, nums: List[int], target: int, is_first: bool) -> int:
+    def findIndex(self, nums: List[int], target: int, is_leftmost: bool) -> int:
         N = len(nums)
         left, right = 0, N - 1
 
@@ -7,7 +7,7 @@ class Solution:
             mid = left + (right - left) // 2
 
             if nums[mid] == target:
-                if is_first:
+                if is_leftmost:
                     if mid == left or nums[mid - 1] < target:
                         return mid
                     else:
