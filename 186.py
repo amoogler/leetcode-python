@@ -16,12 +16,10 @@ class Solution:
         while end < N:
             if s[end] == ' ':
                 reverse(start, end - 1)
-                end += 1
-                start = end
+                start = end + 1
             elif end == N - 1:
                 reverse(start, end)
-                end += 1
-            else:
-                end += 1
+
+            end += 1
 
         return s
