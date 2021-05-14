@@ -10,6 +10,7 @@ class Solution:
             res.append(idx - prev_idx)
 
         prev_idx = float('inf')
+
         for i in range(len(s) - 1, -1, -1):
             if s[i] == c:
                 prev_idx = i
