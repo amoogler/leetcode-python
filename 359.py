@@ -4,7 +4,7 @@ class Logger:
         """
         Initialize your data structure here.
         """
-        self.messages = collections.defaultdict(str)
+        self.messages = dict()
 
     def shouldPrintMessage(self, timestamp: int, message: str) -> bool:
         """
