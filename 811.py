@@ -9,7 +9,7 @@ class Solution:
 
             for i in range(len(domain) - 1, -1, -1):
                 if domain[i] == '.':
-                    domain_count[domain[i + 1 : len(domain)]] += count
+                    domain_count[domain[i + 1 :]] += count
                 elif i == 0:
                     domain_count[domain] += count
 
