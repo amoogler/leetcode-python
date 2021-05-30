@@ -16,8 +16,8 @@ class Solution:
         dp = [False] * (len(s) + 1)
         dp[0] = True
 
-        for i in range(1, len(s) + 1):
-            if any(dp[j] and s[j:i] in words for j in range(i)):
-                dp[i] = True
+        for end in range(1, len(s) + 1):
+            if any(dp[start] and s[start:end] in words for start in range(end)):
+                dp[end] = True
 
         return dp[len(s)]
