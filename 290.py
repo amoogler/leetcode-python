@@ -8,12 +8,12 @@ class Solution:
         str_to_pattern = dict()
         pattern_to_str = dict()
 
-        for idx, (s, p) in enumerate(zip(strs, pattern)):
-            if (s in str_to_pattern and str_to_pattern[s] != pattern[idx]) or \
-               (p in pattern_to_str and pattern_to_str[p] != strs[idx]):
+        for s, p in zip(strs, pattern):
+            if (s in str_to_pattern and str_to_pattern[s] != p) or \
+               (p in pattern_to_str and pattern_to_str[p] != s):
                 return False
 
-            str_to_pattern[s] = pattern[idx]
-            pattern_to_str[p] = strs[idx]
+            str_to_pattern[s] = p
+            pattern_to_str[p] = s
 
         return True
