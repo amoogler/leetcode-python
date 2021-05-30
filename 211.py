@@ -29,9 +29,10 @@ class WordDictionary:
         def search_backtrack(word: str, node: TrieNode) -> bool:
             for i, c in enumerate(word):
                 if c not in node.children:
-                    if c == '.' and any(search_backtrack(word[i + 1:], node.children[x]) for x in node.children):
-                        return True
-                    return False
+                    if c == '.':
+                        return any(search_backtrack(word[i + 1:], next_node) for next_node in node.children.values())
+                    else:
+                        return False
                 else:
                     node = node.children[c]
 
