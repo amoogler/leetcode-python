@@ -52,13 +52,13 @@ class Solution:
         DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
 
         while queue:
-            row, col = queue.popleft()
+            curr_row, curr_col = queue.popleft()
 
             for dr, dc in DIRS:
-                r, c = row + dr, col + dc
+                next_row, next_col = curr_row + dr, curr_col + dc
 
-                if r < 0 or r >= M or c < 0 or c >= N or rooms[r][c] != EMPTY:
+                if next_row < 0 or next_row >= M or next_col < 0 or next_col >= N or rooms[next_row][next_col] != EMPTY:
                     continue
 
-                rooms[r][c] = rooms[row][col] + 1
-                queue.append((r, c))
+                rooms[next_row][next_col] = rooms[curr_row][curr_col] + 1
+                queue.append((next_row, next_col))
