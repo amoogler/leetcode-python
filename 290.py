@@ -1,19 +1,18 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
-        strs = s.split()
+        words = s.split()
 
-        if len(pattern) != len(strs):
+        if len(pattern) != len(words):
             return False
 
-        str_to_pattern = dict()
-        pattern_to_str = dict()
+        w2p = dict()
+        p2w = dict()
 
-        for s, p in zip(strs, pattern):
-            if (s in str_to_pattern and str_to_pattern[s] != p) or \
-               (p in pattern_to_str and pattern_to_str[p] != s):
+        for w, p in zip(words, pattern):
+            if (w in w2p and w2p[w] != p) or (p in p2w and p2w[p] != w):
                 return False
 
-            str_to_pattern[s] = p
-            pattern_to_str[p] = s
+            w2p[w] = p
+            p2w[p] = w
 
         return True
