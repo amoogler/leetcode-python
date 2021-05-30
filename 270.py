@@ -31,6 +31,9 @@ class Solution:
         closest = root.val
 
         while root:
+            if root.val == target:
+                return root.val
+
             closest = min(root.val, closest, key=lambda x: abs(target - x))
             root = root.left if target < root.val else root.right
 
