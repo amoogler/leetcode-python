@@ -4,6 +4,6 @@ class Solution:
         res = [0] * len(words)
 
         for word in words:
-            res[int(word[-1]) - 1] = word[:len(word) - 1]
+            res[int(word[-1]) - 1] = word[:-1]
 
         return ' '.join(res)
