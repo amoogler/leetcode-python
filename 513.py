@@ -7,6 +7,7 @@
 class Solution:
     def findBottomLeftValue(self, root: TreeNode) -> int:
         queue = collections.deque([root])
+        node = None
 
         while queue:
             node = queue.popleft()
