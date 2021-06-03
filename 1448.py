@@ -7,15 +7,15 @@
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
         def dfs(node: TreeNode, curr_max: int, res: list):
+            if not node:
+                return
+
             if node.val >= curr_max:
                 res[0] += 1
-                curr_max = max(node.val, curr_max)
+                curr_max = node.val
 
-            if node.left:
-                dfs(node.left, curr_max, res)
-
-            if node.right:
-                dfs(node.right, curr_max, res)
+            dfs(node.left, curr_max, res)
+            dfs(node.right, curr_max, res)
 
         res = [0]
         dfs(root, root.val, res)
