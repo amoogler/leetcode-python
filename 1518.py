@@ -1,16 +1,16 @@
 class Solution:
-    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
-        total, left_empty, to_drink = 0, 0, numBottles
+    def numWaterBottles(self, num_bottles: int, num_exchange: int) -> int:
+        total, left_empty, to_drink = 0, 0, num_bottles
 
         while to_drink != 0:
             # Drink and count.
             drunk = to_drink
             total += drunk
 
-            # Compute how many new drinks we can get.
-            to_drink = (drunk + left_empty) // numExchange
+            # Update number of drinks we can get for next round.
+            to_drink = (drunk + left_empty) // num_exchange
 
-            # Compute how many empty bottles after exchange.
-            left_empty = (drunk + left_empty) % numExchange
+            # Update number of empty bottles left after exchange.
+            left_empty = (drunk + left_empty) % num_exchange
 
         return total
