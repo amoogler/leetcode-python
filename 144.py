@@ -20,18 +20,32 @@
 #             self.preorder(node.right, preorder_nodes)
 
 # Iterative
+# class Solution:
+#     def preorderTraversal(self, root: TreeNode) -> List[int]:
+#         preorder_nodes, stack = [], []
+#         current = root
+
+#         while stack or current:
+#             if current:
+#                 preorder_nodes.append(current.val)
+#                 stack.append(current)
+#                 current = current.left
+#             else:
+#                 node = stack.pop()
+#                 current = node.right
+
+#         return preorder_nodes
+
 class Solution:
     def preorderTraversal(self, root: TreeNode) -> List[int]:
-        preorder_nodes, stack = [], []
-        current = root
+        preorder_nodes, stack = [], [root]
 
-        while stack or current:
-            if current:
-                preorder_nodes.append(current.val)
-                stack.append(current)
-                current = current.left
-            else:
-                node = stack.pop()
-                current = node.right
+        while stack:
+            node = stack.pop()
+
+            if node:
+                preorder_nodes.append(node.val)
+                stack.append(node.right)
+                stack.append(node.left)
 
         return preorder_nodes
