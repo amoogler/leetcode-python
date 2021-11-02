@@ -6,16 +6,16 @@ class Solution:
         for i in range(R):
             for j in range(C):
                 if grid[i][j] == 1:
-                    if i - 1 < 0 or (i - 1 >= 0 and grid[i - 1][j]) == 0:
+                    if i - 1 < 0 or grid[i - 1][j] == 0:
                         perimeter += 1
 
-                    if i + 1 >= R or (i + 1 < R and grid[i + 1][j]) == 0:
+                    if i + 1 >= R or grid[i + 1][j] == 0:
                         perimeter += 1
 
-                    if j - 1 < 0 or (j - 1 >= 0 and grid[i][j - 1] == 0):
+                    if j - 1 < 0 or grid[i][j - 1] == 0:
                         perimeter += 1
 
-                    if j + 1 >= C or (j + 1 < C and grid[i][j + 1] == 0):
+                    if j + 1 >= C or grid[i][j + 1] == 0:
                         perimeter += 1
 
         return perimeter
