@@ -5,29 +5,29 @@ class Solution:
         if not matrix:
             return res
 
-        R_BEG, R_END, C_BEG, C_END = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
+        r_beg, r_end, c_beg, c_end = 0, len(matrix) - 1, 0, len(matrix[0]) - 1
 
-        while R_BEG <= R_END and C_BEG <= C_END:
-            for i in range(C_BEG, C_END + 1):
-                res.append(matrix[R_BEG][i])
+        while r_beg <= r_end and c_beg <= c_end:
+            for i in range(c_beg, c_end + 1):
+                res.append(matrix[r_beg][i])
 
-            R_BEG += 1
+            r_beg += 1
 
-            for i in range(R_BEG, R_END + 1):
-                res.append(matrix[i][C_END])
+            for i in range(r_beg, r_end + 1):
+                res.append(matrix[i][c_end])
 
-            C_END -= 1
+            c_end -= 1
 
-            if R_BEG <= R_END:
-                for i in range(C_END, C_BEG - 1, -1):
-                    res.append(matrix[R_END][i])
+            if r_beg <= r_end:
+                for i in range(c_end, c_beg - 1, -1):
+                    res.append(matrix[r_end][i])
 
-                R_END -= 1
+                r_end -= 1
 
-            if C_BEG <= C_END:
-                for i in range(R_END, R_BEG - 1, -1):
-                    res.append(matrix[i][C_BEG])
+            if c_beg <= c_end:
+                for i in range(r_end, r_beg - 1, -1):
+                    res.append(matrix[i][c_beg])
 
-                C_BEG += 1
+                c_beg += 1
 
         return res
