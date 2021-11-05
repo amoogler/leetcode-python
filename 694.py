@@ -14,7 +14,6 @@ class Solution:
             for j in range(self.C):
                 if grid[i][j] == 1:
                     island = self.bfs(grid, i, j)
-                    print(island)
                     distinct_islands.add(island)
 
         return len(distinct_islands)
