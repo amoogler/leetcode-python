@@ -7,14 +7,17 @@ class Solution:
             graph[e].append(s)
 
         queue = deque([start])
+        seen.add(start)
 
         while queue:
             curr = queue.pop()
 
             if curr == end:
                 return True
-            elif curr in graph and curr not in seen:
-                queue.extend(graph[curr])
-                seen.add(curr)
+
+            for v in graph[curr]:
+                if v not in seen:
+                    queue.append(v)
+                    seen.add(v)
 
         return False
