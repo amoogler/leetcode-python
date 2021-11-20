@@ -1,65 +1,83 @@
+# BFS Solution:
 class Solution:
     def solve(self, board: List[List[str]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
         self.R, self.C = len(board), len(board[0])
-        borders = []
+        DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
+        borders = deque([])
 
         # Find all the 'O' grids on 4 borders.
-        for i in range(self.R):
-            if board[i][0] == 'O':
-                borders.append((i, 0))
+        for i, j in product(range(self.R), range(self.C)):
+            if i == 0 or i == self.R - 1 or j == 0 or j == self.C - 1:
+                if board[i][j] == 'O':
+                    borders.append((i, j))
 
-            if board[i][self.C - 1] == 'O':
-                borders.append((i, self.C - 1))
+        def bfs(queue: deque):
+            DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
+            seen = set()
 
-        for i in range(self.C):
-            if board[0][i] == 'O':
-                borders.append((0, i))
+            for r, c in queue:
+                seen.add((r, c))
 
-            if board[self.R - 1][i] == 'O':
-                borders.append((self.R - 1, i))
+            while queue:
+                r, c  = queue.popleft()
+
+                if board[r][c] != 'O':
+                    continue
+
+                board[r][c] = 'E'
+
+                for dr, dc in DIRS:
+                    nr, nc = r + dr, c + dc
+
+                    if 0 <= nr < self.R and 0 <= nc < self.C and (nr, nc) not in seen:
+                        queue.append((nr, nc))
+                        seen.add((nr, nc))
 
         # Mark escaped grids with 'E'.
-        for r, c in borders:
-            self.bfs(board, r, c)
+        bfs(borders)
 
         # Flip captured grids from 'O' -> 'X', and escaped ones from 'E' -> 'O'.
-        for i in range(self.R):
-            for j in range(self.C):
-                if board[i][j] == 'O':
-                    board[i][j] = 'X'
-                elif board[i][j] == 'E':
-                    board[i][j] = 'O'
+        for i, j in product(range(self.R), range(self.C)):
+            if board[i][j] == 'O':
+                board[i][j] = 'X'
+            elif board[i][j] == 'E':
+                board[i][j] = 'O'
 
-#     def dfs(self, board: List[List[str]], row: int, col: int):
-#         if row < 0 or row >= self.R or col < 0 or col >= self.C:
-#             return
-
-#         if board[row][col] != 'O':
-#             return
-
-#         board[row][col] = 'E'
-#         DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
-
-#         for dr, dc in DIRS:
-#             self.dfs(board, row + dr, col + dc)
-
-    def bfs(self, board: List[List[str]], row: int, col: int):
-        queue = deque([(row, col)])
+# DFS Solution
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        self.R, self.C = len(board), len(board[0])
         DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
+        borders = deque([])
 
-        while queue:
-            r, c  = queue.popleft()
+        # Find all the 'O' grids on 4 borders.
+        for i, j in product(range(self.R), range(self.C)):
+            if i == 0 or i == self.R - 1 or j == 0 or j == self.C - 1:
+                if board[i][j] == 'O':
+                    self.dfs(board, i, j)
 
-            if board[r][c] != 'O':
-                continue
+        # Flip captured grids from 'O' -> 'X', and escaped ones from 'E' -> 'O'.
+        for i, j in product(range(self.R), range(self.C)):
+            if board[i][j] == 'O':
+                board[i][j] = 'X'
+            elif board[i][j] == 'E':
+                board[i][j] = 'O'
 
-            board[r][c] = 'E'
+    def dfs(self, board: List[List[str]], row: int, col: int):
+        if not (0 <= row < self.R and 0 <= col < self.C):
+            return
 
-            for dr, dc in DIRS:
-                new_r, new_c = r + dr, c + dc
+        if board[row][col] != 'O':
+            return
 
-                if new_r >= 0 and new_r < self.R and new_c >= 0 and new_c < self.C:
-                    queue.append((new_r, new_c))
+        board[row][col] = 'E'
+
+        DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
+        for dr, dc in DIRS:
+            self.dfs(board, row + dr, col + dc)
