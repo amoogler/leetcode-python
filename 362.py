@@ -1,10 +1,11 @@
+# O(n) for getHits() routine.
 class HitCounter:
 
     def __init__(self):
         """
         Initialize your data structure here.
         """
-        self.hits = collections.deque([])
+        self.hits = collections.deque()
         self.total = 0
 
 
@@ -37,9 +38,3 @@ class HitCounter:
                 break
 
         return self.total
-
-
-# Your HitCounter object will be instantiated and called as such:
-# obj = HitCounter()
-# obj.hit(timestamp)
-# param_2 = obj.getHits(timestamp)
