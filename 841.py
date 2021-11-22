@@ -1,18 +1,18 @@
-# DFS Solution
+# DFS Recursive Solution
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
         def dfs(room: int):
-            if room not in visited:
-                visited.add(room)
+            seen.add(room)
 
-                for key in rooms[room]:
+            for key in rooms[room]:
+                if key not in seen:
                     dfs(key)
 
-        visited = set()
+        seen = set()
         dfs(0)
-        return len(visited) == len(rooms)
+        return len(seen) == len(rooms)
 
-# BFS Solution.
+# BFS Solution
 class Solution:
     def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
         visited = set()
@@ -22,11 +22,8 @@ class Solution:
             room = queue.popleft()
             visited.add(room)
 
-            if len(visited) == len(rooms):
-                return True
-
             for key in rooms[room]:
                 if key not in visited:
                     queue.append(key)
 
-        return False
+        return len(visited) == len(rooms)
