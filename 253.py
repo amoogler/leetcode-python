@@ -1,3 +1,4 @@
+# Heap Solution.
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
         sorted_intervals = sorted(intervals, key=lambda x : x[0])
@@ -11,3 +12,19 @@ class Solution:
             heapq.heappush(min_heap, interval[1])
 
         return len(min_heap)
+
+# Sweep-line Solution.
+class Solution:
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        d = defaultdict(int)
+        min_room, total = 0, 0
+
+        for start, end in intervals:
+            d[start] += 1
+            d[end] -= 1
+
+        for time in sorted(d.keys()):
+            total += d[time]
+            min_room = max(min_room, total)
+
+        return min_room
