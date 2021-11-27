@@ -1,16 +1,18 @@
+# Sweep-line technique.
 class Solution:
     def maximumPopulation(self, logs: List[List[int]]) -> int:
-        year_population = collections.defaultdict(int)
-        earliest_year = float(inf)
+        d = defaultdict(int)
+        total, curr, res = 0, 0, 0
 
         for birth, death in logs:
-            for i in range(birth, death):
-                year_population[i] += 1
+            d[birth] += 1
+            d[death] -= 1
 
-        max_population = max(year_population.values())
+        for year in sorted(d.keys()):
+            total += d[year]
 
-        for year in year_population.keys():
-            if year_population[year] == max_population:
-                earliest_year = min(earliest_year, year)
+            if total > curr:
+                curr = total
+                res = year
 
-        return earliest_year
+        return res
