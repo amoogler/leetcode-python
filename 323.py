@@ -1,3 +1,5 @@
+# This problem a graph-based equavalent of LC-200 Number_Of_Islands.
+
 # BFS Soluting using Adjacency Matrix.
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
@@ -58,25 +60,27 @@ class Solution:
 
 # DFS Solution using Adjacency List.
 class Solution:
-    def dfs(self, graph: defaultdict, visited: List[int], i: int):
-        for j in graph[i]:
-            if not visited[j]:
-                visited[j] = 1
-                self.dfs(graph, visited, j)
+    def dfs(self, node: int):
+        if node in self.visited:
+            return
+
+        self.visited.add(node)
+
+        for neighbor in self.graph[node]:
+            self.dfs(neighbor)
 
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        graph, visited, queue = defaultdict(list), [0] * n, deque()
+        self.graph, self.visited = defaultdict(list), set()
         count = 0
 
         # Build an adjacency list to represent an undirected graph.
         for a, b in edges:
-            graph[a].append(b)
-            graph[b].append(a)
+            self.graph[a].append(b)
+            self.graph[b].append(a)
 
         for i in range(n):
-            if not visited[i]:
-                visited[i] = 1
-                self.dfs(graph, visited, i)
+            if i not in self.visited:
+                self.dfs(i)
                 count += 1
 
         return count
