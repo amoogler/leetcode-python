@@ -31,7 +31,6 @@ class Solution:
         return False
 
     # DFS Solution
-    # Time Limited Exceeded.
     def isPrerequisites(self, start: int, end: int) -> bool:
         visited = set()
 
@@ -47,7 +46,7 @@ class Solution:
             visited.add(start)
 
             for v in self.graph[start]:
-                if self.isPrerequisites(v, end):
+                if dfs(v, end):
                     return True
 
             return False
