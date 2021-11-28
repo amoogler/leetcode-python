@@ -4,18 +4,40 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# DFS Solution
 class Solution:
     def minDepth(self, root: TreeNode) -> int:
         if root == None:
             return 0
-        
+
         if root.left == None and root.right == None:
             return 1
-        
+
         if root.left == None:
             return self.minDepth(root.right) + 1
-        
+
         if root.right == None:
             return self.minDepth(root.left) + 1
-        
+
         return min(self.minDepth(root.left), self.minDepth(root.right)) + 1
+
+# BFS Solution (preferred, because this problem is asking min depth)
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+
+        queue = deque([(root, 1)])
+
+        while queue:
+            node, depth = queue.popleft()
+
+            if not node.left and not node.right:
+                return depth
+
+            if node.left:
+                queue.append((node.left, depth + 1))
+
+            if node.right:
+                queue.append((node.right, depth + 1))
