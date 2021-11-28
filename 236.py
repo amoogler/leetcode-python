@@ -5,20 +5,26 @@
 #         self.left = None
 #         self.right = None
 
+# DFS Recursive Solution
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if root == p or root == q:
-            return root
+        def lca(root, p, q):
+            # Base cases.
+            if not root:
+                return None
 
-        left, right = None, None
+            if root == p or root == q:
+                return root
 
-        if root.left:
-            left = self.lowestCommonAncestor(root.left, p, q)
+            # Recursive steps.
+            left = lca(root.left, p, q)
+            right = lca(root.right, p, q)
 
-        if root.right:
-            right = self.lowestCommonAncestor(root.right, p, q)
+            if left and right:
+                return root
+            elif left:
+                return left
+            elif right:
+                return right
 
-        if left and right:
-            return root
-        else:
-            return left or right
+        return lca(root, p, q)
