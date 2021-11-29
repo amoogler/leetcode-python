@@ -12,36 +12,37 @@ class Solution:
         if not node:
             return node
 
-        graph = {}
+        # A map from original node to its clone.
+        clone = {}
         queue = deque([node])
-        graph[node] = Node(node.val, [])
+        clone[node] = Node(node.val, [])
 
         while queue:
             n = queue.popleft()
 
             for neighbor in n.neighbors:
-                if neighbor not in graph:
-                    graph[neighbor] = Node(neighbor.val, [])
+                if neighbor not in clone:
+                    clone[neighbor] = Node(neighbor.val, [])
                     queue.append(neighbor)
 
-                graph[n].neighbors.append(graph[neighbor])
+                clone[n].neighbors.append(clone[neighbor])
 
-        return graph[node]
+        return clone[node]
 
 # DFS Recursive Solution
 class Solution:
     def __init__(self):
-        self.graph = {}
+        self.clone = {}
 
     def cloneGraph(self, node: 'Node') -> 'Node':
         if not node:
             return node
 
-        if node in self.graph:
-            return self.graph[node]
+        if node in self.clone:
+            return self.clone[node]
 
         clone_node = Node(node.val, [])
-        self.graph[node] = clone_node
+        self.clone[node] = clone_node
 
         if node.neighbors:
             clone_node.neighbors = [self.cloneGraph(n) for n in node.neighbors]
