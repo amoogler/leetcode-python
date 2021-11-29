@@ -4,15 +4,8 @@ class Solution:
         Do not return anything, modify matrix in-place instead.
         """
         R, C = len(matrix), len(matrix[0])
-        row_zero, col_zero = False, False
-
-        for i in range(R):
-            if matrix[i][0] == 0:
-                row_zero = True
-
-        for j in range(C):
-            if matrix[0][j] == 0:
-                col_zero = True
+        clear_row = any(matrix[i][0] == 0 for i in range(R))
+        clear_col = any(matrix[0][j] == 0 for j in range(C))
 
         for i in range(R):
             for j in range(C):
@@ -25,10 +18,10 @@ class Solution:
                 if matrix[0][j] == 0 or matrix[i][0] == 0:
                     matrix[i][j] = 0
 
-        if row_zero:
+        if clear_row:
             for i in range(R):
                 matrix[i][0] = 0
 
-        if col_zero:
+        if clear_col:
             for j in range(C):
                 matrix[0][j] = 0
