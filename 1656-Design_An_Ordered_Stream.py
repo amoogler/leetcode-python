@@ -9,14 +9,13 @@ class OrderedStream:
         next_orders = []
 
         for order in self.orders[self.order_count:]:
-            if not order:
-                return next_orders
-            else:
+            if order:
                 next_orders.append(order)
                 self.order_count += 1
+            else:
+                break
 
         return next_orders
-
 
 # Your OrderedStream object will be instantiated and called as such:
 # obj = OrderedStream(n)
