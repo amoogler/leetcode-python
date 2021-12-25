@@ -4,6 +4,8 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# Preorder traversal: Always choose the left middle node as a root.
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         def helper(left: int, right: int) -> TreeNode:
