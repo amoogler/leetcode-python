@@ -11,19 +11,18 @@ class Solution:
         if idx == len(word):
             return True
 
-        if row < 0 or row >= len(board) or col < 0 or col >= len(board[0]):
+        if not (0 <= row < len(board) and 0 <= col < len(board[0])):
             return False
 
         if board[row][col] != word[idx]:
             return False
 
-        res = False
-        temp = board[row][col]
-        board[row][col] = ''
+        board[row][col] = '#'
         DIR = ((1, 0), (-1, 0), (0, 1), (0, -1))
 
-        if any(self.dfs(board, row + dr, col + dc, word, idx + 1) for dr, dc in DIR):
-            res = True
+        for dr, dc in DIR:
+            if self.dfs(board, row + dr, col + dc, word, idx + 1):
+                return True
 
-        board[row][col] = temp
-        return res
+        board[row][col] = word[idx]
+        return False
