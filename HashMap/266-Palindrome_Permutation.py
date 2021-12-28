@@ -1,6 +1,6 @@
 class Solution:
     def canPermutePalindrome(self, s: str) -> bool:
-        count = Counter(list(s))
+        count = Counter(s)
         odd_number = 0
 
         for frequency in count.values():
