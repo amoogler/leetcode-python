@@ -48,4 +48,3 @@ class Solution:
             clone_node.children = [self.cloneTree(child) for child in root.children]
 
         return clone_node
-
