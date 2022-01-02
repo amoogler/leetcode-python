@@ -11,7 +11,7 @@ class Solution:
         for i in range(self.N):
             if i not in seen:
                 count += 1
-                seen.add(0)
+                seen.add(i)
                 self.bfs(seen, i, isConnected)
 
         return count
