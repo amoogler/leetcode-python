@@ -3,13 +3,14 @@ class UnionFind:
         self.root = [i for i in range(size)]
         self.rank = [1] * size
 
+    # Optimized by path compression.
     def find(self, x):
-        if x == self.root[x]:
-            return x
+        if x != self.root[x]:
+            self.root[x] = self.find(self.root[x])
 
-        self.root[x] = self.find(self.root[x])
         return self.root[x]
 
+    # Optimized by union by rank.
     def union(self, x, y):
         root_x = self.find(x)
         root_y = self.find(y)
