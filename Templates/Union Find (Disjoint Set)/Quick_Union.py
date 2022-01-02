@@ -3,25 +3,25 @@ class UnionFind:
         self.root = [i for i in range(size)]
 
     def find(self, x):
-        return self.root[x]
+        while x != self.root[x]:
+            x = self.root[x]
+        return x
 
     def union(self, x, y):
         root_x = self.find(x)
         root_y = self.find(y)
 
         if root_x != root_y:
-            for i in range(len(self.root)):
-                if self.root[i] == root_y:
-                    self.root[i] = root_x
+            self.root[root_y] = root_x
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
 
 # Time Complexity
 # Union-Find Constructor: O(n)
-# Find: O(1)
-# Union: O(n)
-# Connected: O(1)
+# Find: O(n) in worst case.
+# Union: O(n) in worst case as it is based on Find(); however, quicker than Quick-Find.
+# Connected: O(n) in worst case as it is based on Find().
 
 # Space Complexity
-# O(n) for storing the root array. Index is the vertex and value is the root vertex.
+# O(n) for storing the root array. Index is the vertex and value is the parent vertex.
