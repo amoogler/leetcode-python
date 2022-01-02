@@ -1,12 +1,14 @@
 class UnionFind:
     def __init__(self, size):
         self.root = [i for i in range(size)]
-        self.rank = [1] * size # The height of each vertex.
+        self.rank = [1] * size
 
     def find(self, x):
-        while x != self.root[x]:
-            x = self.root[x]
-        return x
+        if x == self.root[x]:
+            return x
+
+        self.root[x] = self.find(self.root[x])
+        return self.root[x]
 
     def union(self, x, y):
         root_x = self.find(x)
@@ -15,11 +17,11 @@ class UnionFind:
         if root_x != root_y:
             if self.rank[root_x] > self.rank[root_y]:
                 self.root[root_y] = root_x
-            elif self.rank[root_x] < self.rank[root_y]:
+            elif self.rank[root_y] < self.rank[root_x]:
                 self.root[root_x] = root_y
             else:
                 self.root[root_y] = root_x
-                self.rank[root_x] += 1
+                self.root[root_x] += 1
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
@@ -27,9 +29,9 @@ class UnionFind:
 # Time Complexity
 # We tried to balance the tree.
 # Union-Find Constructor: O(n)
-# Find: O(logn).
-# Union: O(logn) as it is based on Find().
-# Connected: O(logn) as it is based on Find().
+# Find: O(1) on average.
+# Union: O(1) on average as it is based on Find().
+# Connected: O(1) on average as it is based on Find().
 
 # Space Complexity
-# O(n) for storing the root array and rank array. Index is the vertex and value is the parent vertex.
+# O(n) for storing the root array and rank array.
