@@ -1,17 +1,9 @@
 # Union Find Solution
 class UnionFind:
-    def __init__(self):
-        self.root = {}
-        self.rank = {}
-        self.count = 0
-
-    def add(self, x):
-        if x in self.root or x in self.rank:
-            return
-
-        self.root[x] = x
-        self.rank[x] = 1
-        self.count += 1
+    def __init__(self, size):
+        self.root = [i for i in range(size)]
+        self.rank = [1] * size
+        self.count = size
 
     def size(self):
         return self.count
@@ -39,13 +31,12 @@ class UnionFind:
 
 class Solution:
     def findCircleNum(self, isConnected: List[List[int]]) -> int:
-        R, C = len(isConnected), len(isConnected[0])
-        uf = UnionFind()
+        N = len(isConnected)
+        uf = UnionFind(N)
 
-        for i, j in product(range(R), range(C)):
-            if isConnected[i][j] == 1:
-                uf.add(i)
-                uf.add(j)
-                uf.union(i, j)
+        for i in range(N):
+            for j in range(i + 1, N):
+                if isConnected[i][j] == 1:
+                    uf.union(i, j)
 
         return uf.size()
