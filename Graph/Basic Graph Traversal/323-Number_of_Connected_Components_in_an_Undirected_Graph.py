@@ -3,8 +3,8 @@
 # BFS Soluting using Adjacency Matrix.
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        graph, visited = [[0] * n for _ in range(n)], [0] * n
-        queue = deque()
+        graph, seen = [[0] * n for _ in range(n)], set()
+        queue = deque([])
         count = 0
 
         for a, b in edges:
@@ -12,17 +12,18 @@ class Solution:
             graph[b][a] = 1
 
         for i in range(n):
-            if visited[i]:
+            if i in seen:
                 continue
 
+            seen.add(i)
             queue.append(i)
 
             while queue:
                 node = queue.popleft()
-                visited[node] = 1
 
                 for j in range(n):
-                    if graph[node][j] == 1 and visited[j] == 0:
+                    if graph[node][j] == 1 and j not in seen:
+                        seen.add(j)
                         queue.append(j)
 
             count += 1
@@ -32,7 +33,7 @@ class Solution:
 # BFS Solution using Adjacency List.
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        graph, visited, queue = defaultdict(list), [0] * n, deque()
+        graph, seen, queue = defaultdict(list), set(), deque([])
         count = 0
 
         # Build an adjacency list to represent an undirected graph.
@@ -41,17 +42,18 @@ class Solution:
             graph[b].append(a)
 
         for i in range(n):
-            if visited[i]:
+            if i in seen:
                 continue
 
+            seen.add(i)
             queue.append(i)
 
             while queue:
                 node = queue.popleft()
-                visited[node] = 1
 
                 for v in graph[node]:
-                    if not visited[v]:
+                    if v not in seen:
+                        seen.add(v)
                         queue.append(v)
 
             count += 1
