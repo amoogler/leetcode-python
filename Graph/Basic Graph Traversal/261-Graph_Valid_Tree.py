@@ -4,11 +4,11 @@
 # DFS Iterative Solution
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adjacency = defaultdict(list)
+        graph = defaultdict(list)
 
         for a, b in edges:
-            adjacency[a].append(b)
-            adjacency[b].append(a)
+            graph[a].append(b)
+            graph[b].append(a)
 
         stack = [0]
         parent = {0: -1}
@@ -16,7 +16,7 @@ class Solution:
         while stack:
             node = stack.pop()
 
-            for neighbor in adjacency[node]:
+            for neighbor in graph[node]:
                 if parent[node] == neighbor:
                     continue
 
@@ -31,11 +31,11 @@ class Solution:
 # Iterative BFS Solution
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adjacency = defaultdict(list)
+        graph = defaultdict(list)
 
         for a, b in edges:
-            adjacency[a].append(b)
-            adjacency[b].append(a)
+            graph[a].append(b)
+            graph[b].append(a)
 
         parent = {0: -1}
         queue = deque([0])
@@ -43,7 +43,7 @@ class Solution:
         while queue:
             node = queue.popleft()
 
-            for neighbor in adjacency[node]:
+            for neighbor in graph[node]:
                 if parent[node] == neighbor:
                     continue
 
@@ -58,11 +58,11 @@ class Solution:
 # DFS Recursive Solution
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adjacency = defaultdict(list)
+        graph = defaultdict(list)
 
         for a, b in edges:
-            adjacency[a].append(b)
-            adjacency[b].append(a)
+            graph[a].append(b)
+            graph[b].append(a)
 
         visited = set()
 
@@ -72,7 +72,7 @@ class Solution:
 
             visited.add(node)
 
-            for neighbor in adjacency[node]:
+            for neighbor in graph[node]:
                 if neighbor == parent:
                     continue
 
