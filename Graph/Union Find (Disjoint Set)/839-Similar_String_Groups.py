@@ -31,6 +31,9 @@ class UnionFind:
 
         self.count -= 1
 
+    def connected(self, x, y):
+        return self.find(x) == self.find(y)
+
     def size(self):
         return self.count
 
@@ -42,9 +45,10 @@ class Solution:
 
         for i in range(L - 1):
             for j in range(i + 1, L):
-                str1, str2 = strs[i], strs[j]
+                if uf.connected(i, j):
+                    continue
 
-                if self.isSimilar(str1, str2):
+                if self.isSimilar(strs[i], strs[j]):
                     uf.union(i, j)
 
         return uf.size()
