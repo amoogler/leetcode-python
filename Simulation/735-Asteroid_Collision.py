@@ -15,8 +15,11 @@ class Solution:
                     else:
                         break
 
+                if asteroid == 0:
+                    continue
+
                 # Left-moving asteroid made all the way through.
-                if asteroid != 0 and ((stack and stack[-1] < 0) or not stack):
+                if (stack and stack[-1] < 0) or not stack:
                     stack.append(asteroid)
             else:
                 stack.append(asteroid)
