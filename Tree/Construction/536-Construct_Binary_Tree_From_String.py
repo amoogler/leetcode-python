@@ -16,7 +16,7 @@ class Solution:
             elif c != '(': # digit or '-'
                 num += c
 
-                if i + 1 == len(s) or not s[i + 1].isdigit():
+                if i + 1 == len(s) or not s[i + 1].isdigit(): # '(' or ')'
                     node = TreeNode(int(num))
                     parent = stack[-1]
 
