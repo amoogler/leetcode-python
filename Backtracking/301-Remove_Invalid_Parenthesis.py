@@ -1,3 +1,4 @@
+# DFS - Backtracking based solution.
 class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
         res = []
@@ -36,3 +37,49 @@ class Solution:
 
         remove(s, 0, 0, '(', ')')
         return res
+
+# BFS based solution.
+# Framing problem to a tree alike structure, e.g. ()) -> )), (), ()
+# We can use a set to dedup.
+# BFS guarantees to find the shortest path.
+class Solution:
+    def removeInvalidParentheses(self, s: str) -> List[str]:
+        def isValid(s: str) -> bool:
+            count = 0
+
+            for c in s:
+                if c == '(':
+                    count += 1
+                elif c == ')':
+                    count -= 1
+
+                if count < 0:
+                    return False
+
+            return count == 0
+
+        queue = deque([s])
+        seen = {s}
+
+        while queue:
+            queue_length = len(queue)
+            valid_s = []
+
+            for _ in range(queue_length):
+                curr_s = queue.popleft()
+
+                if isValid(curr_s):
+                    valid_s.append(curr_s)
+                    continue
+
+                for i in range(len(curr_s)):
+                    next_s = curr_s[:i] + curr_s[i + 1:]
+
+                    if next_s not in seen:
+                        queue.append(next_s)
+                        seen.add(next_s)
+
+            if valid_s:
+                return valid_s
+
+        return []
