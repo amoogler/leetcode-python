@@ -44,4 +44,3 @@ class Solution:
             res[curr_day] = days
 
         return res
-
