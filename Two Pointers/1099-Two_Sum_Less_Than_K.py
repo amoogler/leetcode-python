@@ -6,6 +6,7 @@ class Solution:
 
         while left < right:
             nums_sum = sorted_list[left] + sorted_list[right]
+
             if nums_sum < k:
                 res = max(res, nums_sum)
                 left += 1
