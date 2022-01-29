@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 
-# Bottom-Up Approach.
+# Top-down Approach.
 class Solution:
     def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
         res = []
