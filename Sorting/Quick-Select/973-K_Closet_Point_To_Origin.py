@@ -17,35 +17,30 @@ class Solution:
 # Quick-select solution. Average time complexity: O(n), worst time complexity: O(n ^ 2)
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        return self.quick_select(points[:], k)
+        self.quick_select(points, 0, len(points) - 1, k)
+        return points[:k]
 
-    def quick_select(self, points: List[List[int]], k: int) -> List[List[int]]:
-        low, high = 0, len(points) - 1
-        pivot_index = 0
+    def quick_select(self, points, l, r, k):
+        if l < r:
+            p_rand = random.randint(l, r)
+            p = self.partition(points, l, r, p_rand)
 
-        while pivot_index != k:
-            pivot_index = self.partition(points, low, high)
-
-            if pivot_index < k:
-                low = pivot_index + 1
-
-                if low > len(points) - 1:
-                    return points
+            if p == k:
+                return
+            elif p < k:
+                self.quick_select(points, p + 1, r, k)
             else:
-                high = pivot_index - 1
+                self.quick_select(points, l, p - 1, k)
 
-        return points[:pivot_index]
+    def partition(self, points, l, r, p):
+        pivot = points[p]
+        points[r], points[p] = points[p], points[r]
+        le_wall = l
 
-    def partition(self, points: List[List[int]], low: int, high: int) -> int:
-        pivot = pow(points[low][0], 2) + pow(points[low][1], 2)
-        le_wall = low
-
-        for i in range(low + 1, high + 1):
-            distance = pow(points[i][0], 2) + pow(points[i][1], 2)
-
-            if distance <= pivot:
+        for i in range(l, r):
+            if (points[i][0] ** 2 + points[i][1] ** 2) <= (pivot[0] ** 2 + pivot[1] ** 2):
+                points[le_wall], points[i] = points[i], points[le_wall]
                 le_wall += 1
-                points[i], points[le_wall] = points[le_wall], points[i]
 
-        points[low], points[le_wall] = points[le_wall], points[low]
+        points[le_wall], points[r] = points[r], points[le_wall]
         return le_wall

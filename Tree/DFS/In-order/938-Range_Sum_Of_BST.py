@@ -25,3 +25,20 @@ class Solution:
             pushleft(node.right, stack)
 
         return range_sum
+
+class Solution:
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        def in_order(node):
+            nonlocal range_sum
+
+            if node:
+                in_order(node.left)
+
+                if low <= node.val <= high:
+                    range_sum += node.val
+
+                in_order(node.right)
+
+        range_sum = 0
+        in_order(root)
+        return range_sum
