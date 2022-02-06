@@ -1,25 +1,20 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
+        s = list(s)
         stack = []
-        right_remove = set()
-        res = []
 
-        for idx, c in enumerate(s):
+        # Remove unmatched ')'s.
+        for i, c in enumerate(s):
             if c == '(':
-                stack.append(idx)
+                stack.append(i)
             elif c == ')':
                 if stack:
                     stack.pop()
                 else:
-                    right_remove.add(idx)
+                    s[i] = ''
 
-        for idx, c in enumerate(s):
-            if c == '(' and stack and stack[0] == idx:
-                stack.pop(0)
-                continue
-            elif c == ')' and idx in right_remove:
-                continue
+        # Remove left over '('s.
+        while stack:
+            s[stack.pop()] = ''
 
-            res.append(c)
-
-        return ''.join(res)
+        return ''.join(s)
