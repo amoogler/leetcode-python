@@ -9,7 +9,6 @@ class Solution:
         seq1, seq2 = [], []
         self.getLeafSequence(root1, seq1)
         self.getLeafSequence(root2, seq2)
-        print(seq1, seq2)
         return ','.join(seq1) == ','.join(seq2)
 
     def getLeafSequence(self, node: TreeNode, sequence: List[int]):
