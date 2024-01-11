@@ -1,7 +1,6 @@
 from typing import List
 from collections import deque
 
-
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -10,7 +9,7 @@ from collections import deque
 #         self.right = right
 class Solution:
     def levelOrderBottom(self, root: Optional[TreeNode]) -> List[List[int]]:
-        levels = []
+        levels = deque([])
         if not root:
             return levels
 
@@ -25,6 +24,6 @@ class Solution:
                     queue.append(node.left)
                 if node.right:
                     queue.append(node.right)
-            levels.append(level)
+            levels.appendleft(level)
 
-        return levels[::-1]
+        return levels
