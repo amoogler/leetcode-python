@@ -7,15 +7,11 @@
 
 # DFS recursive solution.
 class Solution:
-    def maxDepth(self, root: TreeNode) -> int:
-        if root == None:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
             return 0
-
-        if root.left == None and root.right == None:
-            return 1
-
         return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
-
+ 
 # BFS solution.
 class Solution:
     def maxDepth(self, root: TreeNode) -> int:

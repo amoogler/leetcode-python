@@ -12,7 +12,7 @@ class Solution:
         levels = []
         if not root:
             return levels
-        
+
         queue = deque([root])
         rev = False
         while queue:
@@ -31,5 +31,5 @@ class Solution:
                     queue.append(node.right)
             levels.append(level)
             rev = ~rev
-        
+
         return levels
