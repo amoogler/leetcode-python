@@ -2,19 +2,15 @@ class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         sorted_intervals = sorted(intervals, key=lambda x : x[0])
         merged = []
-        current = sorted_intervals[0]
-
-        for incoming_start, incoming_end in sorted_intervals[1:]:
-            current_start = current[0]
-            current_end = current[1]
-
-            if incoming_start > current_end:
-                merged.append(current)
-                current = [incoming_start, incoming_end]
+        curr = sorted_intervals[0]
+        for start, end in sorted_intervals[1:]:
+            curr_start, curr_end = curr[0], curr[1]
+            if start > curr_end:
+                merged.append(curr)
+                curr = [start, end]
             else:
-                current = [current_start, max(current_end, incoming_end)]
-
-        merged.append(current)
+                curr = [curr_start, max(curr_end, end)]
+        merged.append(curr)
 
         return merged
 
