@@ -25,11 +25,9 @@ class Solution:
 
         while stack:
             node = stack.pop()
-
             if node:
                 preorder_nodes.append(node.val)
-
                 for i in range(len(node.children) - 1, -1, -1):
                     stack.append(node.children[i])
-
+        
         return preorder_nodes
