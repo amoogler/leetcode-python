@@ -8,17 +8,13 @@ class Node:
 # DFS recursive solution.
 class Solution:
     def maxDepth(self, root: 'Node') -> int:
-        if not root:
-            return 0
-
-        if all(not child for child in root.children):
-            return 1
-
         max_depth = 0
-
+        if not root:
+            return max_depth
+        
         for child in root.children:
             max_depth = max(max_depth, self.maxDepth(child))
-
+        
         return max_depth + 1
 
 
