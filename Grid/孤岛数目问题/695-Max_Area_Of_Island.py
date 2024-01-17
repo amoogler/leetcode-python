@@ -1,3 +1,6 @@
+from typing import List
+from collections import deque
+
 # DFS Solution.
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
@@ -30,37 +33,32 @@ class Solution:
 # BFS Solution.
 class Solution:
     def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
-        self.R, self.C = len(grid), len(grid[0])
         max_area = 0
+        self.R, self.C = len(grid), len(grid[0])
 
-        for i in range(self.R):
-            for j in range(self.C):
-                if grid[i][j] == 1:
-                    area = self.computeArea(grid, i, j)
-                    max_area = max(max_area, area)
-
+        for i, j in product(range(self.R), range(self.C)):
+            if grid[i][j] == 1:
+                grid[i][j] = 0
+                area = self.computeArea(grid, i, j)
+                max_area = max(area, max_area)
+        
         return max_area
-
+    
     def computeArea(self, grid: List[List[int]], row: int, col: int) -> int:
-        area = 1
         queue = deque([(row, col)])
-        grid[row][col] = 0
-        DIRS = ((-1, 0), (1, 0), (0, -1), (0, 1))
+        DIRS = ((-1, 0), (0, -1), (1, 0), (0, 1))
+        area = 1
 
         while queue:
             r, c = queue.popleft()
-
             for dr, dc in DIRS:
                 nr, nc = r + dr, c + dc
 
-                if not (0 <= nr < self.R and 0 <= nc < self.C):
+                if not (0 <= nr < self.R and 0 <= nc < self.C and grid[nr][nc] == 1):
                     continue
-
-                if grid[nr][nc] != 1:
-                    continue
-
-                queue.append((nr, nc))
+                
                 grid[nr][nc] = 0
                 area += 1
-
+                queue.append((nr, nc))
+        
         return area
