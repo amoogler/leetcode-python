@@ -40,25 +40,27 @@ class Solution:
 
 class Solution:
     def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
         R, C = len(rooms), len(rooms[0])
-        EMPTY, GATE = 2147483647, 0
-        queue = collections.deque([])
+        queue = deque([])
+        DIRS = ((-1, 0), (0, -1), (1, 0), (0, 1))
+        EMPTY, GATE = pow(2, 31) - 1, 0
 
-        for i in range(R):
-            for j in range(C):
-                if rooms[i][j] == GATE:
-                    queue.append((i, j))
-
-        DIRS = ((1, 0), (-1, 0), (0, 1), (0, -1))
-
+        # Search for all the doors
+        for i, j in product(range(R), range(C)):
+            if rooms[i][j] == GATE:
+                queue.append((i, j))
+        
+        # From each door, do BFS.
         while queue:
             r, c = queue.popleft()
-
             for dr, dc in DIRS:
                 nr, nc = r + dr, c + dc
 
                 if not (0 <= nr < R and 0 <= nc < C) or rooms[nr][nc] != EMPTY:
                     continue
-
+                
                 rooms[nr][nc] = rooms[r][c] + 1
                 queue.append((nr, nc))
